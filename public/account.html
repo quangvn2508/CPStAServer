@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/account_style.css">
+    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Account</title>
+</head>
+<body>
+    <script src="./javascripts/navigation_script.js"></script>
+    <div id="nav-bar">
+        <div id="logo" onclick="toIndex()">
+            <img src="./resource/left_header.svg">
+            <img src="./resource/logo.jpg" style="height: 50px;">
+            <img src="./resource/right_header.svg">
+        </div>
+        <div id="menu">
+            <div class="nav-item" onclick="location.href='./contests.html';"><div>Contests</div></div>
+            <div class="nav-item" onclick="location.href='./problems.html';"><div>Problems</div></div>
+        </div>
+        <div id="account">
+            <div class="nav-item" onclick="logout()"><div>Logout</div></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="profile-section">
+            <div id="profile-picture">
+                <img src="./resource/profile-default.svg">
+                <div id="profile-name"></div>
+            </div>
+        </div>
+        <div id="ranking"></div>
+        <div id="past-contest"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./javascripts/account_script.js"></script>
+</body>
+</html>

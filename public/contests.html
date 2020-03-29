@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <link rel="stylesheet" href="./stylesheets/contests_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Contests</title>
+</head>
+
+<body>
+    <script src="./javascripts/navigation_script.js"></script>
+    <div id="nav-bar">
+        <div id="logo" onclick="toIndex()">
+            <img src="./resource/left_header.svg">
+            <img src="./resource/logo.jpg" style="height: 50px;">
+            <img src="./resource/right_header.svg">
+        </div>
+        <div id="menu">
+            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
+            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+        </div>
+        <div id="account">
+            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+        </div>
+    </div>
+
+    <div id="top">
+        <div class="title">Contest</div>
+        <div class="message">Contest is a good way for us to improve our programming skills</div>
+    </div>
+    <div id="bot"></div>
+    <div id="weekly-contest"><span>Our Weekly contest</span></div>
+    <div id="past-contests"><span>Our past contests</span></div>
+    <div id="create-contest" onclick="toCreateContest()"><span>Create your contests</span></div>
+
+    <script src="./javascripts/contests_script.js"></script>
+</body>
+
+</html>

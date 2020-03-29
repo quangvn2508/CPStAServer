@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <link rel="stylesheet" href="./stylesheets/manage_contests.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Contests</title>
+    
+</head>
+
+<body>
+    <script src="./javascripts/navigation_script.js"></script>
+    <div id="nav-bar">
+        <div id="logo" onclick="toIndex()">
+            <img src="./resource/left_header.svg">
+            <img src="./resource/logo.jpg" style="height: 50px;">
+            <img src="./resource/right_header.svg">
+        </div>
+        <div id="menu">
+            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
+            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+        </div>
+        <div id="account">
+            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="title">Manage contests</div>
+        <div class="table-container">
+            <table style="width: 100%; position: absolute; top: 0; left: 0;" cellspacing="0" cellpadding="0">
+                
+                <thead>
+                    <tr>
+                        <th>Contest name</th>
+                        <th>Date created</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody id="contest-list">
+                    <tr>
+                        <td>Beta Contest 8</td>
+                        <td>Some date</td>
+                        <td>Nickname</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./javascripts/manage_contests.js"></script>
+</body>
+
+</html>

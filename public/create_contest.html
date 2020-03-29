@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <link rel="stylesheet" href="./stylesheets/create_contest.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Contests</title>
+    
+</head>
+
+<body>
+    <script src="./javascripts/navigation_script.js"></script>
+    <div id="nav-bar">
+        <div id="logo" onclick="toIndex()">
+            <img src="./resource/left_header.svg">
+            <img src="./resource/logo.jpg" style="height: 50px;">
+            <img src="./resource/right_header.svg">
+        </div>
+        <div id="menu">
+            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
+            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+        </div>
+        <div id="account">
+            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="title">Create contest</div>
+        <div class="input-field">
+            <form id="input-form">
+                <span class="form-element label">Contest name:</span>
+                <input class="form-element input-box" type="text" name="name"/><br>
+    
+                <span class="form-element label">Contest start time:</span>
+                <input class="form-element input-box" type="datetime-local" name="startTime"/><br>
+
+                <span class="form-element label">Contest end time:</span>
+                <input class="form-element input-box" type="datetime-local" name="endTime"/><br>
+            </form>
+            <div id="result"></div>
+            <button class="form-element" onclick="creatContest()">Create</button>
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./javascripts/create_contest.js"></script>
+</body>
+
+</html>

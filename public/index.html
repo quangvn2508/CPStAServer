@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/index_style.css">
+    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>CPStA</title>
+</head>
+<body>
+    <script src="./javascripts/navigation_script.js"></script>
+    <div id="nav-bar">
+        <div id="logo" onclick="toIndex()">
+            <img src="./resource/left_header.svg">
+            <img src="./resource/logo.jpg" style="height: 50px;">
+            <img src="./resource/right_header.svg">
+        </div>
+        <div id="menu">
+            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
+            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+        </div>
+        <div id="account">
+            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+        </div>
+    </div>
+
+    <div id="content-bar">
+        <img src="./../resource/arrow.svg">
+        <div id="section-list">
+            <a href="#top"><div class="section-item">Home<div></div></div></a>
+            <a href="#About"><div class="section-item">About<div></div></div></a>
+            <a href="#Rules"><div class="section-item">Rules<div></div></div></a>
+            <a href="#Contact"><div class="section-item">Contact<div></div></div></a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="top">
+            <div id="name">
+                <div id="CP">Competitive Programming</div>
+                <div id="SA">St Andrews</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="About">
+            <div class="section-title">About</div>
+            <div class="content">&bullet; This contest is open to everyone of all skill levels and is only around 60 minutes long. We are a small group of St Andrews students whose main intention is to improve our algorithmic and problem solving skills. This will prepare one for competitive programming competitions as well as help one ace technical coding interviews.</div>
+        </div>
+
+        <div id="Rules">
+            <div class="section-title">Rules</div>
+            <div class="content">&bullet; The creator of this contest is solely responsible for setting and communicating the eligibility requirements associated with prizes awarded to participants, as well as for procurement and distribution of all prizes. The contest creator holds HackerRank harmless from and against any and all claims, losses, damages, costs, awards, settlements, orders, or fines.</div>
+        </div>
+
+        <div id="Contact">
+            <div class="section-title">Contact</div>
+            <div class="content">
+                <ul>
+                    <li>Facebook</li>
+                    <li>Github</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./javascripts/index_script.js"></script>
+</body>
+</html>
