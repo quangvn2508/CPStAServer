@@ -39,7 +39,7 @@ function updateElements() {
     elements['startTime'].defaultValue = initialObj['startTime'].substring(0, 16);
     elements['endTime'].defaultValue = initialObj['endTime'].substring(0, 16);
     for (var i = 0; i < initialObj['testers'].length; i++) {
-        elements['testers'].innerHTML += '<li id=\"' + initialObj['testers'][i]['_id'] + '\">'+initialObj['testers'][i]['username']+'<img src=\"./resource/delete.svg\"></li>'
+        elements['testers'].innerHTML += '<li id=\"' + initialObj['testers'][i]['_id'] + '\">'+initialObj['testers'][i]['username']+'<img onclick="deleteTester(\'' + initialObj['testers'][i]['_id'] + '\')" src=\"./resource/delete.svg\"></li>'
     }
 
     for (var i = 0; i < initialObj['problems'].length; i++) {
@@ -68,7 +68,7 @@ function addTester(event) {
         if (this.readyState === 4) {
             var obj = JSON.parse(this.response);
             if (this.status === 200) {
-                elements['testers'].innerHTML += '<li id=\"' + obj['_id'] + '\">'+ obj['username']+'<img src=\"./resource/delete.svg\"></li>';
+                elements['testers'].innerHTML += '<li id=\"' + obj['_id'] + '\">'+ obj['username']+'<img onclick="deleteTester(\'' + obj['_id'] + '\')" src=\"./resource/delete.svg\"></li>';
             }
             else if (this.status === 404) {
                 // username not found
@@ -78,6 +78,10 @@ function addTester(event) {
     xmlhttp.open("GET", url, true);
     xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
     xmlhttp.send();
+}
+
+function deleteTester(tester_id) {
+    elements['testers'].removeChild(document.getElementById(tester_id));
 }
 
 function addProblem(event) {

@@ -31,3 +31,7 @@ function logout() {
     localStorage.removeItem('token');
     location.href = './register.html';
 }
+
+function toManageContests() {
+    location.href = '/manage_contests.html';
+}

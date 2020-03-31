@@ -5,10 +5,17 @@
     min-height: 100%;
 }
 
+#back-button {
+    position: relative;
+    margin-top: 100px;
+    height: 30px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
 #name {
     position: relative;
     width: 100%;
-    margin-top: 100px;
     padding: 10px 0px 10px 20px;
     color: var(--global-color-DarkBlue);
     font-size: 3vmax;
