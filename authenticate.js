@@ -50,45 +50,26 @@ exports.verifyLogin = (req) => {
     })
 }
 
-// exports.CompareId = function (id, req) {
-//     var token = opts.jwtFromRequest(req);
-//     return new Promise((resolve, reject) => {
-//         jwt.verify(token, config.secretKey, function (err, decoded) {
-//             if (err) {
-//                 reject (err);
-//             } else if (decoded) {
-//                 console.log(decoded._id + " ");
-//                 console.log(id);
-//                 console.log(decoded._id.localeCompare(id) === 0);
-//                 if (decoded._id.localeCompare(id) === 0) {
-//                     resolve();
-//                 }
-//                 else {
-//                     var err = new Error('You are not authorized to modify this comment');
-//                     err.status = 403;
-//                     reject(err);
-//                 }
-//             }
-//         });
-//     })
-// }
-
-
-// exports.verifyAdmin = (this.verifyUser, (req, res, next) => {
-//     var token = opts.jwtFromRequest(req);
-//     jwt.verify(token, config.secretKey, function (err, decoded) {
-//         if (err) {
-//             next(err);
-//         } else if (decoded) {
-//             User.findById(decoded._id, (err, user) => {
-//                 if (user.admin) {
-//                     next();
-//                 } else {
-//                     var err = new Error("You not admin");
-//                     err.status = 401;
-//                     next(err);
-//                 }
-//             });
-//         }
-//     });
-// });
+exports.verifyAdmin = (req) => {
+    var token = opts.jwtFromRequest(req);
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, config.secretKey, function (err, decoded) {
+            if (err) {
+                reject (err);
+            } else if (decoded) {
+                User.findById(decoded._id)
+                .then((user) => {
+                    if (user.admin) {
+                        resolve(decoded._id);
+                    }
+                    else {
+                        reject("You not addmin");
+                    }
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+            }
+        });
+    })
+}

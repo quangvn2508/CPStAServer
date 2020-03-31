@@ -9,9 +9,9 @@ const problemRouter = express.Router();
 
 problemRouter.use(bodyParser.json());
 
-problemRouter.route('/')
+problemRouter.route('/admin/')
 .post((req, res, next) => {
-    authenticate.verifyLogin(req)
+    authenticate.verifyAdmin(req)
     .then((user_id) => {
         console.log(user_id);
         Problem.create({owner: user_id, contest: req.body.contestId, name: req.body.name})
@@ -32,7 +32,7 @@ problemRouter.route('/')
     .catch((err) => {
         res.statusCode = 401;
         res.setHeader('Content-Type', 'application/json');
-        res.json({status: 'Please log in'});
+        res.json({status: 'Please log in as admin to use this operation'});
     })
 });
 

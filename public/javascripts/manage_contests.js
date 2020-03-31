@@ -4,7 +4,7 @@ function getList() {
     
     var xmlhttp = new XMLHttpRequest();
     var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/contest/manage_contests";
+    var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin";
     
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4) {

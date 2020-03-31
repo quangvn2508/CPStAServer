@@ -13,9 +13,16 @@ profileRouter.route('/')
     .then((user_id) => {
         User.findOne({_id: user_id})
         .then((user) => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'plain/text');
-            res.end('/account.html?username=' + user.username);
+            if (user === null) {
+                res.statusCode = 401;
+                res.setHeader('Content-Type', 'plain/text');
+                res.end('/register.html');
+            }
+            else {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'plain/text');
+                res.end('/account.html?username=' + user.username);
+            }
         })
         .catch((err) => next(err));
     })

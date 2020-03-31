@@ -12,6 +12,18 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/admin', (req, res, next) => {
+  authenticate.verifyAdmin(req)
+  .then((user_id) => {
+    res.statusCode = 200;
+    res.end();
+  })
+  .catch((err) => {
+    res.statusCode = 401;
+    res.end();
+  })
+})
+
 router.get('/:username', (req, res, next) => {
   User.findOne({username: req.params.username})
   .select('username _id')

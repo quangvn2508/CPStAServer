@@ -46,12 +46,11 @@ function creatContest() {
 
     var xmlhttp = new XMLHttpRequest();
     var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/contest/create";
+    var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin/";
     
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
             var obj = JSON.parse(this.response);
-            console.log(obj);
 
             printText(result.id, obj.status);
             if (this.status === 200) {
@@ -63,9 +62,5 @@ function creatContest() {
 
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-    
-
     xmlhttp.send(JSON.stringify(formObj));
-
-    console.log(formObj);
 }

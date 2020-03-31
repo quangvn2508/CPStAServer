@@ -18,7 +18,7 @@ var initialObj;
 // Load page
 var xmlhttp = new XMLHttpRequest();
 var getUrl = window.location;
-var url = getUrl.protocol + "//" + getUrl.host + "/contest/" + contestId;
+var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin/" + contestId;
 
 xmlhttp.onreadystatechange = function() {
     
@@ -37,7 +37,7 @@ function createTesterLi(_id, username) {
 }
 
 function createProblemLi(_id, name) {
-    return '<li id=\"'+_id+'\">' + name + '<div class="tool-bar"><img onclick="editProblem(\'' + _id  + '\')" src="./resource/edit.svg"><img onclick="deleteProblem(\'' + _id  + '\')" src="./resource/delete.svg"></div></li>'
+    return '<li id=\"'+_id+'\">' + name + '<div class="tool-bar"><img onclick="deleteProblem(\'' + _id  + '\')" src="./resource/delete.svg"><img onclick="editProblem(\'' + _id  + '\')" src="./resource/edit.svg"></div></li>'
 }
 
 function updateElements() {
@@ -71,7 +71,6 @@ function addTester(event) {
     var getUrl = window.location;
     var url = getUrl.protocol + "//" + getUrl.host + "/users/" + event.target.value;
 
-    console.log(url);
     xmlhttp.onreadystatechange = function() {
         
         if (this.readyState === 4) {
@@ -96,7 +95,7 @@ function addProblem(event) {
 
     var xmlhttp = new XMLHttpRequest();
     var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/problem/";
+    var url = getUrl.protocol + "//" + getUrl.host + "/problem/admin";
 
     xmlhttp.onreadystatechange = function() {
         
@@ -147,7 +146,7 @@ function update() {
 
     var xmlhttp = new XMLHttpRequest();
     var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/contest/" + contestId;
+    var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin/" + contestId;
 
     xmlhttp.onreadystatechange = function() {
         

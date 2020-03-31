@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./stylesheets/navigation_style.css">
-    <link rel="stylesheet" href="./stylesheets/contests_style.css">
+    <link rel="stylesheet" href="./stylesheets/contests.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
     <title>Contests</title>
 </head>
@@ -32,9 +32,13 @@
         <div class="message">Contest is a good way for us to improve our programming skills</div>
     </div>
     <div id="bot"></div>
-    <div id="weekly-contest"><span>Our Weekly contest</span></div>
-    <div id="past-contests"><span>Our past contests</span></div>
-    <div id="create-contest" onclick="toManageContests()"><span>Create your contests</span></div>
+    <div id="middle" class="two-column">
+        <div><span>Our Weekly contest</span></div>
+        <div><span>Our past contests</span></div>
+        <div id="admin" onclick="toManageContests()"><span>Create your contests</span></div>
+    </div>
+
+    <script src="./javascripts/contests.js"></script>
 </body>
 
 </html>
