@@ -90,14 +90,21 @@
     color: var(--global-color-White);
 }
 
-.list > li > img {
+.tool-bar {
     position: absolute;
     height: 20px;
     top: 50%;
-    right: 5px;
+    right: 0px;
     transform: translate(0%, -50%);
+}
+
+.tool-bar > img {
+    float: right;
+    height: 20px;
+    margin-right: 5px;
     cursor: pointer;
 }
+
 
 #result {
     height: 30px;

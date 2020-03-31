@@ -35,8 +35,6 @@ function creatContest() {
     result.innerHTML = "";
     var formObj = formToJSON(inputForm.elements);
     
-    formObj['name'] = formObj['name'].replace(/\s/g, "-");
-    
     if (isEpmty(formObj)) {
         printText(result.id, "Please fille all input fields");
         return;

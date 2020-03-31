@@ -77,7 +77,7 @@ contestRouter.route('/:contestId')
                 res.json({status: "You are not authorized to modify this contest"});
             }
             else {
-                return Contest.findById(req.params.contestId).populate('testers', 'username');
+                return Contest.findById(req.params.contestId).populate('testers', 'username').populate('problems','name');
             }
         })
         .then((contest) => {

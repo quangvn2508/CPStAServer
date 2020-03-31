@@ -5,14 +5,16 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var Problem = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     statement: {
         type: String,
         default: '',
     },
-    tag: [String],
+    contest: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contest'
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

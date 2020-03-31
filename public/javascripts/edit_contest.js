@@ -32,6 +32,14 @@ xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('toke
 xmlhttp.send();
 // end load page
 
+function createTesterLi(_id, username) {
+    return '<li id=\"' + _id + '\">' + username + '<div class="tool-bar"><img onclick="deleteTester(\'' + _id  + '\')" src=\"./resource/delete.svg\"></div></li>'
+}
+
+function createProblemLi(_id, name) {
+    return '<li id=\"'+_id+'\">' + name + '<div class="tool-bar"><img onclick="editProblem(\'' + _id  + '\')" src="./resource/edit.svg"><img onclick="deleteProblem(\'' + _id  + '\')" src="./resource/delete.svg"></div></li>'
+}
+
 function updateElements() {
     elements['name'].innerHTML = initialObj['name'];
     elements['rule'].innerHTML = initialObj['rule'];
@@ -39,11 +47,11 @@ function updateElements() {
     elements['startTime'].defaultValue = initialObj['startTime'].substring(0, 16);
     elements['endTime'].defaultValue = initialObj['endTime'].substring(0, 16);
     for (var i = 0; i < initialObj['testers'].length; i++) {
-        elements['testers'].innerHTML += '<li id=\"' + initialObj['testers'][i]['_id'] + '\">'+initialObj['testers'][i]['username']+'<img onclick="deleteTester(\'' + initialObj['testers'][i]['_id'] + '\')" src=\"./resource/delete.svg\"></li>'
+        elements['testers'].innerHTML += createTesterLi(initialObj['testers'][i]['_id'], initialObj['testers'][i]['username']);
     }
 
     for (var i = 0; i < initialObj['problems'].length; i++) {
-        elements['problems'].innerHTML += '<li id=\"' + initialObj['problems'][i]['_id'] + '\">'+initialObj['problems'][i]['name']+'<img src=\"./resource/delete.svg\"></li>'
+        elements['problems'].innerHTML += createProblemLi(initialObj['problems'][i]['_id'], initialObj['problems'][i]['name']);
     }
 }
 
@@ -58,6 +66,7 @@ function getList(list_id) {
 
 function addTester(event) {
     if (event.keyCode !== 13) return;
+
     var xmlhttp = new XMLHttpRequest();
     var getUrl = window.location;
     var url = getUrl.protocol + "//" + getUrl.host + "/users/" + event.target.value;
@@ -68,24 +77,60 @@ function addTester(event) {
         if (this.readyState === 4) {
             var obj = JSON.parse(this.response);
             if (this.status === 200) {
-                elements['testers'].innerHTML += '<li id=\"' + obj['_id'] + '\">'+ obj['username']+'<img onclick="deleteTester(\'' + obj['_id'] + '\')" src=\"./resource/delete.svg\"></li>';
+                elements['testers'].innerHTML += createTesterLi(obj['_id'], obj['username']);
             }
             else if (this.status === 404) {
-                // username not found
+                displayAlert("Error: " + obj.status);
             }
         }
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
     xmlhttp.send();
+    event.target.value = "";
 }
 
-function deleteTester(tester_id) {
-    elements['testers'].removeChild(document.getElementById(tester_id));
-}
 
 function addProblem(event) {
+    if (event.keyCode !== 13) return;
 
+    var xmlhttp = new XMLHttpRequest();
+    var getUrl = window.location;
+    var url = getUrl.protocol + "//" + getUrl.host + "/problem/";
+
+    xmlhttp.onreadystatechange = function() {
+        
+        if (this.readyState === 4) {
+            var obj = JSON.parse(this.response);
+            if (this.status === 200) {
+                elements['problems'].innerHTML += createProblemLi(obj['_id'], obj['name']);
+            }
+            else {
+                displayAlert("Error: " + obj.status);
+            }
+        }
+    };
+    xmlhttp.open("POST", url, true);
+    xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
+    xmlhttp.setRequestHeader('Content-Type', 'application/json');
+    var data = {contestId: contestId, name: event.target.value};
+    xmlhttp.send(JSON.stringify(data));
+    event.target.value = "";
+}
+
+
+function deleteTester(tester_id) {
+    var c = confirm("Are you sure you want to delete?");
+    if (c) {
+        elements['testers'].removeChild(document.getElementById(tester_id));
+    }
+}
+
+function deleteProblem(problem_id) {
+    var c = confirm("Are you sure you want to delete?");
+    if (c) {
+        elements['problems'].removeChild(document.getElementById(problem_id));
+    }
 }
 
 function update() {
