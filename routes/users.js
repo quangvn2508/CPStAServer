@@ -12,6 +12,24 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/:username', (req, res, next) => {
+  User.findOne({username: req.params.username})
+  .select('username _id')
+  .then((user) => {
+    if (user === null) {
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({status: "User with this username not found"});
+    }
+    else {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(user);
+    }
+  })
+  .catch((err) => next(err))
+});
+
 
 router.post('/signup', (req, res, next) => {
   // already deal with error regarding registration process

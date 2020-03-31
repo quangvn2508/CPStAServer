@@ -13,9 +13,9 @@ function getList() {
             if (this.status === 200) {
                 var list = "";
                 for (var i = 0; i < obj.length; i++) {
-                    list += "<tr onclick=\"location.href='/edit_contest.html?id=" + obj[i]['_id'] + "';\"><td>" + obj[i]['name'] + "</td><td>" + new Date(obj[i]['createdAt']).toUTCString() + "</td><td>" + obj[i]['nickname'] + "</td></tr>";
+                    list += "<tr onclick=\"location.href='/edit_contest.html?id=" + obj[i]['_id'] + "';\"><td>" + obj[i]['name'] + "</td><td>" + new Date(obj[i]['createdAt']).toUTCString() + "</td><td>" + obj[i]['owner']['nickname'] + "</td></tr>";
                 }
-                contestList.innerHTML = list;
+                contestList.innerHTML = list + contestList.innerHTML;
             }
             else if (this.status === 401) {
                 // not logged in
@@ -24,11 +24,10 @@ function getList() {
         }
     };
     xmlhttp.open("GET", url, true);
-
     xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-
     xmlhttp.send();
 }
 
 
 getList();
+

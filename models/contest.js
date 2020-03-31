@@ -30,7 +30,7 @@ var Contest = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    problem: [{
+    problems: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Problem'
     }]

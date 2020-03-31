@@ -2,10 +2,10 @@
     position: relative;
     left: 20%;
     width: 60%;
-    height: 100%;
+    min-height: 100%;
 }
 
-#contest-name {
+#name {
     position: relative;
     width: 100%;
     margin-top: 100px;
@@ -14,48 +14,92 @@
     font-size: 3vmax;
 }
 
-.input-field {
+.input-field > form {
     position: relative;
+    margin-top: 50px;
     width: 100%;
-    height: 550px;
-    padding: 0px 40px;
+    height: auto;
 }
 
 .form-element {
     position: relative;
     min-height: 50px;
-    margin: 20px 0px;
     font-size: 20px;
+    float: left;
     color: var(--global-color-DarkBlue);
+    padding: 5px 20px;
+    margin: 20px 0px;
+    outline: none;
 }
 
 .label {
-    width: 40%;
+    width: 30%;
+    clear: both;
 }
 
 .input-box {
-    width: 50%;
-    padding: 10px 20px 10px 20px;
-    overflow: visible;
+    width: 70%;
 }
 
-.input-field > form {
-    margin-top: 50px;
+.large-input-box {
+    border: 1px solid var(--global-color-Grey);
+    height: auto !important;
+}
+
+.adder {
+    width: 200px;
+    color: var(--global-color-White);
+    background-color: var(--global-color-DarkBlue);
+    transition-duration: 0.5s;
+    border: none;
+}
+
+.adder:focus {
+    width: 70%;
+    border: initial;
+    border: 1px solid var(--global-color-Grey);
+    color: var(--global-color-DarkBlue);
+    background-color: var(--global-color-White);
+}
+
+/* List */
+.list {
+    left: 30%;
+    width: 70%;
+    padding: 0px 0px 10px 0px;
+    margin: unset;
+    list-style-type: none;
+}
+
+.list > li {
+    position: relative;
+    height: auto;
     width: 100%;
-    height: 280px;
+    padding: 5px;
 }
 
-.input-field > form > * {
-    float: left;
+.list > li:hover {
+    background-color: var(--global-color-DarkBlue);
+    color: var(--global-color-White);
 }
 
-.input-field > div {
+.list > li > img {
+    position: absolute;
+    height: 20px;
+    top: 50%;
+    right: 5px;
+    transform: translate(0%, -50%);
+    cursor: pointer;
+}
+
+#result {
     height: 30px;
     font-size: 12px;
     color: var(--global-color-Black);
 }
 
 .input-field > button {
+    clear: both;
     width: 300px;
     cursor: pointer;
     background-color: var(--global-color-DarkBlue);

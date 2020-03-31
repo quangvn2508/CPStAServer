@@ -34,8 +34,8 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
 function creatContest() {
     result.innerHTML = "";
     var formObj = formToJSON(inputForm.elements);
-
-    formObj['name'].replace(/\s/g, '-');
+    
+    formObj['name'] = formObj['name'].replace(/\s/g, "-");
     
     if (isEpmty(formObj)) {
         printText(result.id, "Please fille all input fields");
@@ -57,7 +57,7 @@ function creatContest() {
 
             printText(result.id, obj.status);
             if (this.status === 200) {
-                // to contest edit page
+                location.href = "./manage_contests.html";
             }
         }
     };

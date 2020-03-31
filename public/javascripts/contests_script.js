@@ -1,3 +1,3 @@
-function toCreateContest() {
-    location.href = '/create_contest.html';
+function toManageContests() {
+    location.href = '/manage_contests.html';
 }

@@ -18,6 +18,14 @@ html, body {
     height: 100%;
 }
 
+.centering-text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
 ::-webkit-scrollbar {
     width: 0px;
 }
