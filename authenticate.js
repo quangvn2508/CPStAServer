@@ -59,7 +59,7 @@ exports.verifyAdmin = (req) => {
             } else if (decoded) {
                 User.findById(decoded._id)
                 .then((user) => {
-                    if (user.admin) {
+                    if (user.admin === true) {
                         resolve(decoded._id);
                     }
                     else {
