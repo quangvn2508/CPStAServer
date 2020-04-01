@@ -36,6 +36,69 @@ problemRouter.route('/admin/')
     })
 });
 
+problemRouter.route('/admin/:problemId')
+.get((req, res, next) => {
+    authenticate.verifyAdmin(req)
+    .then((user_id) => {
+        Problem.findById(req.params.problemId)
+        .then((problem) => {
+            if (problem === null) {
+                res.statusCode = 404;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({status: "Cannot find problem with this id"});
+            }
+            else {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(problem);
+            }
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => {
+        res.statusCode = 401;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({status: 'Please log in as admin to use this operation'});
+    });
+})
+.put((req, res, next) => {
+    authenticate.verifyAdmin(req)
+    .then((user_id) => {
+        Problem.findById(req.params.problemId)
+        .then((problem) => {
+            console.log(user_id + " " + problem.owner );
+            if (problem === null) {
+                res.statusCode = 404;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({status: "Cannot find problem with this id"});
+            }
+            else if (problem.owner != user_id) {
+                res.statusCode = 401;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({status: "You are not authorized to modify this problem"});
+            }
+            else {
+                return problem.update(req.body);
+            }
+        })
+        .catch((problem) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(problem);
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => {
+        console.log(err);
+        res.statusCode = 401;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({status: 'Please log in as admin to use this operation'});
+    });
+})
+.delete((req, res, next) => {
+
+});
+
 // contestRouter.post('/create', (req, res, next) => {
 //     authenticate.verifyLogin(req)
 //     .then((user_id) => {
