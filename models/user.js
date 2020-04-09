@@ -15,6 +15,8 @@ var User = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contest'
     }]
+}, {
+    timestamps: true
 });
 
 User.plugin(passportLocalMongoose);

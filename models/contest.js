@@ -1,6 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var ContestProblem = new Schema({
+    score: {
+        type: Number,
+        min: 0,
+        default: 0
+    },
+    problemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Problem'
+    }
+})
+
 var Contest = new Schema({
     name: {
         type: String,
@@ -30,10 +42,7 @@ var Contest = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    problems: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Problem'
-    }]
+    problems: [ ContestProblem ]
 },{
     timestamps: true
 });
