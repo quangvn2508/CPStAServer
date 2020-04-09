@@ -26,30 +26,29 @@ contestRouter.route('/admin')
 .get((req, res, next) => {
     authenticate.verifyAdmin(req)
     .then((user_id) => {
-        User.findById(user_id, (err, user) => {
-            if (err !== null) {
-                return next(err);
-            }
-            Contest.find({_id: user.ownedContests})
-            .select('name createdAt owner')
-            .populate('owner', 'nickname')
-            .then((contests) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(contests);
-            })
-            .catch((err) => next(err));
-        });
+        User.findById(user_id)
+        .then((user) => {
+            return Contest.find({_id: user.ownedContests})
+                        .select('name createdAt owner')
+                        .populate('owner', 'nickname');
+        })
+        .then((contests) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(contests);
+        })
+        .catch((err) => next(err));
     })
     .catch((err) => {
         res.statusCode = 401;
         res.setHeader('Content-Type', 'application/json');
-        res.json({status: 'Please log in as admin to use this operation'});
+        res.json({msg: 'Please log in as admin to use this operation'});
     });
 })
 .post((req, res, next) => {
     authenticate.verifyAdmin(req)
     .then((user_id) => {
+        // add owner to json
         req.body['owner'] = user_id;
         Contest.create(req.body)
         .then((contest) => {
@@ -61,7 +60,7 @@ contestRouter.route('/admin')
             .then((user) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({status: 'Contest create successfully'});
+                res.json({msg: 'Contest create successfully'});
             })
             .catch((err) => next(err));
         })

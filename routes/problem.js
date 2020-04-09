@@ -27,7 +27,7 @@ problemRouter.route('/admin/')
                 res.json(problem);
             }
         })
-        .catch((err) => next(err));
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
         res.statusCode = 401;

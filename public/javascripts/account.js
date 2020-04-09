@@ -3,7 +3,10 @@ account = function(){
     const signup_card = document.getElementById("signup-card");
     const login_form = document.getElementById("login-form");
     const signup_form = document.getElementById("signup-form");
+    const URL = window.location;
+    const letterNumber = /^[0-9a-zA-Z]+$/;
     var flip = false;
+    var formObj, msg, xmlhttp, url, res;
     document.getElementById("login-card-btn").addEventListener('click', flip_card, false);
     document.getElementById("signup-card-btn").addEventListener('click', flip_card, false);
 
@@ -25,39 +28,20 @@ account = function(){
     function flip_card() {
         if (!flip) {
             addremove(signup_card, login_card);
-            resetForm(login_form.elements);
+            form.resetForm(login_form.elements);
         }
         else {
             addremove(login_card, signup_card);
-            resetForm(signup_form.elements);
+            form.resetForm(signup_form.elements);
         }
         flip = !flip;
     }
-
-    /**
-     * Get value in form and convert to JSON object
-     * @param {*} elements 
-     */
-    const formToJSON = (elements) => [].reduce.call(elements, (JSONobj, element) => {
-        JSONobj[element.name] = element.value;
-        return JSONobj;
-    }, {});
-
-    /**
-     * Reset all input field in form
-     * @param {*} elements in form
-     */
-    const resetForm = (elements) => [].reduce.call(elements, (data, element) => {
-        element.value = "";
-        return data;
-    }, {});
 
     /**
      * Check if user's input is valid
      * @param {JSON} obj 
      */
     function validate(obj) {
-        var letterNumber = /^[0-9a-zA-Z]+$/;
         for (var p in obj) {
             if (obj[p] === "") return "Please fill all input fields";
             if (obj[p].length < 5) return "Input too short";
@@ -72,23 +56,65 @@ account = function(){
      * submit login info
      */
     document.getElementById("login-submit-btn").addEventListener('click', () => {
-        var formObj, msg;
-        formObj = formToJSON(login_form.elements);
+        formObj = form.formToJSON(login_form.elements);
         msg = validate(formObj);
         if (msg !== null) {
             alert(msg);
+            return;
         }
+
+
+        // REST
+        xmlhttp = new XMLHttpRequest();
+        url = URL.protocol + "//" + URL.host + "/users/login";
+        
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                res = JSON.parse(this.response);
+                // console.log(res);
+                alert(res.msg);
+                if (this.status === 200) {
+                    localStorage.setItem('token', res.token);
+                    location.href = '/profile.html?username=' + res.username;
+                }
+            }
+        };
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify(formObj));
     }, false);
 
     /**
      * submit sign up info
      */
     document.getElementById("signup-submit-btn").addEventListener('click', () => {
-        var formObj, msg;
-        formObj = formToJSON(signup_form.elements);
+        formObj = form.formToJSON(signup_form.elements);
         msg = validate(formObj);
         if (msg !== null) {
             alert(msg);
+            return;
         }
+
+        if (formObj['password'] !== formObj['repassword']) {
+            alert("Password not matched");
+            return;
+        }
+        
+        // REST
+        xmlhttp = new XMLHttpRequest();
+        url = URL.protocol + "//" + URL.host + "/users/signup";
+        
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status === 200) {
+                    alert("Register successfully");
+                    flip_card();
+                }
+                else  alert(JSON.parse(this.response).err.message);
+            }
+        };
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify(formObj));
     }, false);
 }();

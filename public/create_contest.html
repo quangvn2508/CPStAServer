@@ -11,7 +11,7 @@
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
 
-    <title>Account</title>
+    <title>Create contest</title>
 </head>
 <body>
     <!-- Navigation bar -->
@@ -39,7 +39,7 @@
         <div class="thin-container">
             <div class="thin-page-name text-db">Create contest</div>
             <div class="form-container">
-                <form class="form">
+                <form class="form" id="contest-form">
                     <span class="form-element form-text-style form-element-4-col">Contest name:</span>
                     <input class="form-element form-text-style form-element-8-col" type="text" name="name">
                     
@@ -49,11 +49,13 @@
                     <span class="form-element form-text-style form-element-4-col">Contest end time:</span>
                     <input class="form-element form-text-style form-element-8-col" type="datetime-local" name="endTime">
                 </form>
-                <button class="form-element form-submit-btn form-element-4-col text-w">Submit</button>
+                <button class="form-element form-submit-btn form-element-4-col text-w" id="create-btn">Submit</button>
             </div>
         </div>
     </div>
     <!-- scripts -->
     <script src="javascripts/nav.js"></script>
+    <script src="javascripts/form.js"></script>
+    <script src="javascripts/create_contest.js"></script>
 </body>
 </html>

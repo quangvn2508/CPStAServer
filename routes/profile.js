@@ -11,25 +11,19 @@ profileRouter.route('/')
 .get((req, res, next)  => {
     authenticate.verifyLogin(req)
     .then((user_id) => {
-        User.findOne({_id: user_id})
+        User.findById(user_id)
+        .select("username")
         .then((user) => {
-            if (user === null) {
-                res.statusCode = 401;
-                res.setHeader('Content-Type', 'plain/text');
-                res.end('/register.html');
-            }
-            else {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'plain/text');
-                res.end('/account.html?username=' + user.username);
-            }
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user);
         })
-        .catch((err) => next(err));
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'plain/text');
-        res.end('/register.html');
+        // If not logged in
+        res.statusCode = 401;
+        res.end();
     });
 })
 .post((req, res, next) => {
@@ -53,7 +47,7 @@ profileRouter.route('/:username')
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(user);
-    }, (err) => next(err))
+    })
     .catch((err) => next(err));
 })
 .post((req, res, next) => {

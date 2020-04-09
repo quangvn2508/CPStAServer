@@ -1,5 +1,24 @@
 contests = function(){
     const bar_container = document.getElementById("bar-container-id");
+    const URL = window.location;
+    var xmlhttp, url;
+
+    /**
+     * Check if user is admin
+     */
+    init = function(){
+        xmlhttp = new XMLHttpRequest();
+        url = URL.protocol + "//" + URL.host + "/users/admin";
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status === 200) three_to_two();
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
+        xmlhttp.send();
+    }();
 
     /**
      * Go to next weekly contest page
