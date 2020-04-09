@@ -1,0 +1,27 @@
+.profile-picture-container {
+    height: 200px;
+    width: 200px;
+
+    overflow: hidden;
+    
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profile-nickname {
+    width: 100%;
+    height: auto;
+
+    position: relative;
+
+    font-size: 30px;
+    text-align: center;
+    color: var(--global-color-DarkBlue);
+}

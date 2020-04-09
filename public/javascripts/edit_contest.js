@@ -1,163 +1,117 @@
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
+edit_contest = function(){
+    const form_ids = [ "name", "startTime", "endTime", "description", "rule", "testers", "problems"];
+    var elements = {};
+
+    /**
+     * Get all the neccessary element
+     */
+    form_ids.forEach((key) => {
+        elements[key] = document.getElementById(key);
     });
-    return vars;
-}
 
-var objName = ["name", "rule", "description", "startTime", "endTime", "testers", "problems"];
-var elements = {};
+    /**
+     * Create a node in 'tester' list with pre-define format
+     * @param {string} _id 
+     * @param {string} _nickname 
+     * @returns {Element} new element
+     */
+    function createTesterLi(_id, _nickname) {
+        var li = document.createElement("li");
+        li.id = _id;
+        li.classList.add("list-item", "edit-contest-list-style");
+        li.innerHTML =  "<div class=\"list-item-left\">" + _nickname + "</div>" +
+                        "<div class=\"list-item-right\" onclick=\"edit_contest.deleteItem(\'" + _id + "\')\"><img src=\"/static/resource/delete.svg\"></div>";
+        return li;
+    }
 
-for (var i = 0; i < objName.length; i++) {
-    elements[objName[i]] = document.getElementById(objName[i]);
-}
+    /**
+     * Create a node in 'problems' list with pre-define format
+     * @param {string} _id 
+     * @param {string} _name 
+     * @param {number} _score default 0
+     * @returns {Element} new element
+     */
+    function createProblemLi(_id, _name, _score = 0) {
+        var li = document.createElement("li");
+        li.id = _id;
+        li.classList.add("list-item", "edit-contest-list-style");
+        li.innerHTML =  "<div class=\"list-item-left\">" + _name + "</div>" + 
+                        "<div class=\"list-item-right\" onclick=\"edit_contest.deleteItem(\'" + _id + "\')\"><img src=\"/static/resource/delete.svg\"></div>" +
+                        "<div class=\"list-item-right\" onclick=\"edit_contest.goToEditProblem(\'" + _id + "\')\"><img src=\"/static/resource/edit.svg\"></div>" +
+                        "<div class=\"list-item-right\"><input class=\"edit-contest-input\" type=\"text\" placeholder=\"Max score\" value = \"" + _score + "\"></div>";
+        return li;
+    }
 
-var contestId = getUrlVars()['id'];
-var initialObj;
-// Load page
-var xmlhttp = new XMLHttpRequest();
-var getUrl = window.location;
-var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin/" + contestId;
-
-xmlhttp.onreadystatechange = function() {
+    /**
+     * Delete an entry in list with id _id
+     * @param {string} _id 
+     */
+    function deleteItem(_id) {
+        var e = document.getElementById(_id);
+        e.parentNode.removeChild(e);
+    }
     
-    if (this.readyState == 4) {
-        initialObj = JSON.parse(this.response);
-        updateElements();
-    }
-};
-xmlhttp.open("GET", url, true);
-xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-xmlhttp.send();
-// end load page
-
-function createTesterLi(_id, username) {
-    return '<li id=\"' + _id + '\">' + username + '<div class="tool-bar"><img onclick="deleteTester(\'' + _id  + '\')" src=\"./resource/delete.svg\"></div></li>'
-}
-
-function createProblemLi(_id, name) {
-    return '<li id=\"'+_id+'\">' + name + '<div class="tool-bar"><img onclick="deleteProblem(\'' + _id  + '\')" src="./resource/delete.svg"><img onclick="editProblem(\'' + _id  + '\')" src="./resource/edit.svg"></div></li>'
-}
-
-function updateElements() {
-    elements['name'].innerHTML = initialObj['name'];
-    elements['rule'].innerHTML = initialObj['rule'];
-    elements['description'].innerHTML = initialObj['description'];
-    elements['startTime'].defaultValue = initialObj['startTime'].substring(0, 16);
-    elements['endTime'].defaultValue = initialObj['endTime'].substring(0, 16);
-    for (var i = 0; i < initialObj['testers'].length; i++) {
-        elements['testers'].innerHTML += createTesterLi(initialObj['testers'][i]['_id'], initialObj['testers'][i]['username']);
+    /**
+     * Navigate to edit_problem page and pass _id as url parameter
+     * @param {string} _id 
+     */
+    function goToEditProblem(_id) {
+        location.href = "./edit_problem.html?id=" + _id;
     }
 
-    for (var i = 0; i < initialObj['problems'].length; i++) {
-        elements['problems'].innerHTML += createProblemLi(initialObj['problems'][i]['_id'], initialObj['problems'][i]['name']);
+    /**
+     * Update data from server when load page
+     * @param {object} _obj 
+     */
+    function setForm(_obj) {
+        elements['name'].innerHTML = _obj['name'];
+        elements['startTime'].defaultValue = _obj['startTime'].substring(0, 16);
+        elements['endTime'].defaultValue = _obj['endTime'].substring(0, 16);
+        elements['description'].innerHTML = _obj['description'];
+        elements['rule'].innerHTML = _obj['rule'];
+        _obj['testers'].forEach((entry) => {
+            elements['testers'].innerHTML += createTesterLi(entry['_id'], entry['username']);
+        });
+            
+        _obj['problems'].forEach((entry) => {
+            elements['testers'].innerHTML += createProblemLi(entry['_id'], entry['score'] , entry['username']);
+        });
     }
-}
-
-function getList(list_id) {
-    var items = elements[list_id].getElementsByTagName("li");
-    var id_list = [];
-    for (var i = 0; i < items.length; ++i) {
-        id_list.push(items[i].id);
-    }
-    return id_list;
-}
-
-function addTester(event) {
-    if (event.keyCode !== 13) return;
-
-    var xmlhttp = new XMLHttpRequest();
-    var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/users/" + event.target.value;
-
-    xmlhttp.onreadystatechange = function() {
-        
-        if (this.readyState === 4) {
-            var obj = JSON.parse(this.response);
-            if (this.status === 200) {
-                elements['testers'].innerHTML += createTesterLi(obj['_id'], obj['username']);
-            }
-            else if (this.status === 404) {
-                displayAlert("Error: " + obj.status);
-            }
+    
+    /**
+     * Get current information from form and save as JSON object
+     * @returns {Object}
+     */
+    function getForm() {
+        var obj = {}, i, temp;
+        obj['name'] = elements['name'].innerHTML;
+        obj['startTime'] = elements['startTime'].value;
+        obj['endTime'] = elements['endTime'].value;
+        obj['description'] = elements['description'].innerHTML;
+        obj['rule'] = elements['rule'].innerHTML;
+        obj['testers'] = [];
+        temp = elements['testers'].getElementsByTagName("li");
+        for (i = 0; i < temp.length; i++) {
+            obj['testers'].push(temp[i].id);
         }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-    xmlhttp.send();
-    event.target.value = "";
-}
-
-
-function addProblem(event) {
-    if (event.keyCode !== 13) return;
-
-    var xmlhttp = new XMLHttpRequest();
-    var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/problem/admin";
-
-    xmlhttp.onreadystatechange = function() {
-        
-        if (this.readyState === 4) {
-            var obj = JSON.parse(this.response);
-            if (this.status === 200) {
-                elements['problems'].innerHTML += createProblemLi(obj['_id'], obj['name']);
-            }
-            else {
-                displayAlert("Error: " + obj.status);
-            }
+        obj['problems'] = [];
+        temp = elements['problems'].getElementsByTagName("li");
+        for (i = 0; i < temp.length; i++) {
+            obj['problems'].push({
+                id: temp[i].id,
+                score: temp[i].getElementsByTagName("input")[0].value
+            });
         }
-    };
-    xmlhttp.open("POST", url, true);
-    xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-    xmlhttp.setRequestHeader('Content-Type', 'application/json');
-    var data = {contestId: contestId, name: event.target.value};
-    xmlhttp.send(JSON.stringify(data));
-    event.target.value = "";
-}
-
-
-function deleteTester(tester_id) {
-    var c = confirm("Are you sure you want to delete?");
-    if (c) {
-        elements['testers'].removeChild(document.getElementById(tester_id));
+        console.log(obj);
+        return obj;
     }
-}
 
-function deleteProblem(problem_id) {
-    var c = confirm("Are you sure you want to delete?");
-    if (c) {
-        elements['problems'].removeChild(document.getElementById(problem_id));
-    }
-}
-
-function update() {
-    var reqobj = {};
-    reqobj['nam'] = elements['name'].innerHTML;
-    reqobj['rule'] = elements['rule'].innerHTML;
-    reqobj['description'] = elements['description'].innerHTML;
-    reqobj['startTime'] = elements['startTime'].value;
-    reqobj['endTime'] = elements['endTime'].value;
-    reqobj['testers'] = getList('testers');
-    reqobj['problems'] = getList('problems');
-
-    console.log(reqobj);
-
-    var xmlhttp = new XMLHttpRequest();
-    var getUrl = window.location;
-    var url = getUrl.protocol + "//" + getUrl.host + "/contest/admin/" + contestId;
-
-    xmlhttp.onreadystatechange = function() {
-        
-        if (this.readyState == 4) {
-            var obj = JSON.parse(this.response);
-            console.log(obj);
-        }
+    elements["testers"].appendChild(createTesterLi("myId", "nickname")); // to be removed
+    elements["problems"].appendChild(createProblemLi("myId", "problem name", 234)); // to be removed
+    
+    
+    return {
+        deleteItem: deleteItem,
+        goToEditProblem: goToEditProblem
     };
-
-    xmlhttp.open("PUT", url, true);
-    xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
-    xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(JSON.stringify(reqobj));
-}
+}();

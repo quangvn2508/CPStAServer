@@ -3,40 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/account_style.css">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/account.css">
+    <link rel="stylesheet" href="stylesheets/form.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
     <title>Account</title>
 </head>
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
-        </div>
-        <div id="menu">
-            <div class="nav-item" onclick="location.href='./contests.html';"><div>Contests</div></div>
-            <div class="nav-item" onclick="location.href='./problems.html';"><div>Problems</div></div>
-        </div>
-        <div id="account">
-            <div class="nav-item" onclick="logout()"><div>Logout</div></div>
-        </div>
-    </div>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
 
-    <div id="main-content">
-        <div id="profile-section">
-            <div id="profile-picture">
-                <img src="./resource/profile-default.svg">
-                <div id="profile-name"></div>
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
+        </div>
+    </nav>
+
+    <!-- main content -->
+    <div class="full-size-page bg-DarkBlue">
+        <!-- Login card -->
+        <div id="login-card" class="card-container show-card">
+            <button id="login-card-btn" class="card-toggle-btn">Sign up</button>
+            <div class="card-content-container">
+
+                <!-- Input field -->
+                <div class="card-content-wrapper">
+                    <div class="card-name">Log in</div>
+                    <form class="form" id="login-form">
+                        <input class="form-element form-text-style form-element-12-col" type="text" placeholder="Username" name="username">
+                        <input class="form-element form-text-style form-element-12-col" type="password" placeholder="Password" name="password">
+                    </form>
+                    <button id="login-submit-btn" class="form-element form-submit-btn form-element-12-col text-w">Submit</button>
+                </div>
             </div>
         </div>
-        <div id="ranking"></div>
-        <div id="past-contest"></div>
+
+        <!-- Sign up card -->
+        <div id="signup-card" class="card-container hide-card">
+            <button id="signup-card-btn" class="card-toggle-btn">Log in</button>
+            <div class="card-content-container">
+                
+                <!-- Input field -->
+                <div class="card-content-wrapper">
+                    <div class="card-name">Sign up</div>
+                    <form class="form" id="signup-form">
+                        <input class="form-element form-text-style form-element-12-col" type="text" placeholder="Username" name="username">
+                        <input class="form-element form-text-style form-element-12-col" type="password" placeholder="Password" name="password">
+                        <input class="form-element form-text-style form-element-12-col" type="password" placeholder="Re-enter password" name="repassword">
+                        <input class="form-element form-text-style form-element-12-col" type="text" placeholder="Nickname" name="nickname">
+                    </form>
+                    <button id="signup-submit-btn" class="form-element form-submit-btn form-element-12-col text-w">Submit</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./javascripts/account_script.js"></script>
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/account.js"></script>
 </body>
 </html>

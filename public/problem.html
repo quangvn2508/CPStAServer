@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/problem.css">
+    <link rel="stylesheet" href="stylesheets/form.css">
+    <!-- Marked -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.2/marked.min.js"></script>
+    <!-- CodeMirror -->
+	<link rel="stylesheet" href="static/codemirror/lib/codemirror.css">
+    <script src="static/codemirror/lib/codemirror.js"></script>
+
+        <!-- CodeMirror Theme -->
+        <link rel="stylesheet" href="static/codemirror/theme/ambiance.css">
+        <link rel="stylesheet" href="static/codemirror/theme/base16-dark.css">
+        <link rel="stylesheet" href="static/codemirror/theme/darcula.css">
+        <link rel="stylesheet" href="static/codemirror/theme/eclipse.css">
+        <link rel="stylesheet" href="static/codemirror/theme/elegant.css">
+        <link rel="stylesheet" href="static/codemirror/theme/icecoder.css">
+        <link rel="stylesheet" href="static/codemirror/theme/idea.css">
+        <link rel="stylesheet" href="static/codemirror/theme/isotope.css">
+        <link rel="stylesheet" href="static/codemirror/theme/material-darker.css">
+        <link rel="stylesheet" href="static/codemirror/theme/mdn-like.css">
+        <link rel="stylesheet" href="static/codemirror/theme/monokai.css">
+        <link rel="stylesheet" href="static/codemirror/theme/neo.css">
+        <!-- CodeMirror Modes -->
+        <script src="static/codemirror/mode/clike/clike.js"></script>
+        <script src="static/codemirror/mode/javascript/javascript.js"></script>
+        <script src="static/codemirror/mode/python/python.js"></script>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <title>Problem</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="full-size-page">
+        <div class="d-container">
+            <div class="thin-container">
+                <div class="thin-page-name text-db" id="name">Problem name</div>
+                <div class="d-container md-preview" id="preview"></div>
+                <div class="form-container">
+                    <form class="form">
+                        <label class="form-element form-text-style form-element-3-col">Theme:</label>
+                        <select name="theme" class="form-element form-text-style form-element-3-col cus-select-style" id="theme-selector"></select>
+    
+                        <label class="form-element form-text-style form-element-3-col">Language:</label>
+                        <select name="language" class="form-element form-text-style form-element-3-col cus-select-style" id="mode-selector"></select>
+                    </form>
+                    
+                </div>
+                <div class="editor-container">
+                    <textarea id="editor"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="javascripts/problem.js"></script>
+    <script src="javascripts/nav.js"></script>
+</body>
+</html>

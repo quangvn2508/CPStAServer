@@ -3,75 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
-    <link rel="stylesheet" href="./stylesheets/problem_style.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/two_section.css">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
     <title>Problems</title>
 </head>
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
         </div>
-        <div id="menu">
-            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
-            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+    </nav>
+
+    <div class="full-size-page two-sec-page">
+        <div class="two-section-page-title">
+            <div class="two-section-page-name">Problems</div>
+            <div class="two-section-page-para">Solving problem is a good way for us to improve our programming skills</div>
         </div>
-        <div id="account">
-            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
-        </div>
-    </div>
-
-    <div id="main-content">
-        <div class="table-name">Problems</div>
-        <div class="table-container">
-            <table style="width: 100%; position: absolute; top: 0; left: 0;" cellspacing="0" cellpadding="0">
-
-                <!-- <tr>
-                    <td>Beta Contest 8</td>
-                    <td>Mar 15th 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 7</td>
-                    <td>Mar 8th 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 6</td>
-                    <td>Mar 1th 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 5</td>
-                    <td>Feb 23rd 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 4</td>
-                    <td>Feb 16th 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 3</td>
-                    <td>Feb 9th 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 2</td>
-                    <td>Feb 2nd 2020, 14:00 GMT</td>
-                </tr>
-
-                <tr>
-                    <td>Beta Contest 1</td>
-                    <td>Jan 26th 2020, 14:00 GMT</td>
-                </tr> -->
-
-                
-            </table>
+        <div class="two-sec-bar">
+            <div class="two-sec-bar-container two-sec-bar-container-2-col">
+                <div class="two-sec-bar-item">
+                    <div class="centering-text two-sec-bar-text" id="past-id">Our past problems</div>
+                </div>
+                <div class="two-sec-bar-item">
+                    <div class="centering-text two-sec-bar-text" id="git-id">Code on Github</div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/problems.js"></script>
 </body>
 </html>

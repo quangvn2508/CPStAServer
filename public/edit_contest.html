@@ -1,67 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
-    <link rel="stylesheet" href="./stylesheets/edit_contest.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/form.css">
+    <link rel="stylesheet" href="stylesheets/list.css">
+    <link rel="stylesheet" href="stylesheets/edit_contest.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <title>Contests</title>
-    
+
+    <title>Edit contest</title>
 </head>
-
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
         </div>
-        <div id="menu">
-            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
-            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
-        </div>
-        <div id="account">
-            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="full-size-page">
+        <div class="thin-container">
+            <div class="thin-page-name text-db" id="name"></div>
+            <div class="form-container">
+                <form class="form">
+                    <span class="form-element form-text-style form-element-4-col">Contest start time:</span>
+                    <input class="form-element form-text-style form-element-8-col" type="datetime-local" id="startTime">
+
+                    <span class="form-element form-text-style form-element-4-col">Contest end time:</span>
+                    <input class="form-element form-text-style form-element-8-col" type="datetime-local" id="endTime">
+
+                    <span class="form-element form-text-style form-element-4-col">Contest description:</span>
+                    <div class="form-element form-div-input form-text-style form-element-8-col" contenteditable="true" data-text="Brief description" id="description"></div>
+
+                    <span class="form-element form-text-style form-element-4-col">Contest rule:</span>
+                    <div class="form-element form-div-input form-text-style form-element-8-col" contenteditable="true" data-text="Contest's Rules" id="rule"></div>
+
+                    <span class="form-element form-text-style form-element-4-col">Testers:</span>
+                    <input class="form-element form-text-style form-element-8-col" placeholder="Add a tester" type="text" id="tester-add">
+                    <!-- List of testers  -->
+                    <div class="form-element form-element-4-col"></div>
+                    <div class="form-element form-element-8-col">
+                        <ul class="list-container" id="testers"></ul>
+                    </div>
+
+                    <span class="form-element form-element-4-col">Problems:</span>
+                    <input class="form-element form-text-style form-element-8-col" placeholder="Add a problem" type="text" id="problem-add">
+                    <!-- List of problems -->
+                    <div class="form-element form-element-4-col"></div>
+                    <div class="form-element form-element-8-col">
+                        <ul class="list-container" id="problems"></ul>
+                    </div>
+
+                </form>
+                <button class="form-element form-submit-btn form-element-4-col text-w">Submit</button>
+            </div>
         </div>
     </div>
-
-    <div id="main-content">
-        <img id="back-button" src="./resource/back.svg" onclick="toManageContests()">
-        <div id="name"></div>
-        <div class="input-field">
-            <form id="input-form">
-                <span class="form-element label">Contest start time:</span>
-                <input id="startTime" class="form-element input-box" type="datetime-local"/><br>
-
-                <span class="form-element label">Contest end time:</span>
-                <input id="endTime" class="form-element input-box" type="datetime-local"/><br>
-
-                <span class="form-element label">Description:</span>
-                <div  id="description" name="description" contenteditable="true" class="form-element input-box large-input-box"></div>
-
-            
-                <span class="form-element label">Rule:</span>
-                <div id="rule" contenteditable="true" class="form-element input-box large-input-box"></div>
-                
-                <span class="form-element label">Tester:</span>
-                <input class="form-element adder" placeholder="Add a tester" onkeyup="addTester(event)"></input>
-                    <ul id="testers" class="form-element list"></ul>
-                <span class="form-element label small-label">Problem:</span>
-                <input class="form-element adder" placeholder="Add a problem" onkeyup="addProblem(event)"></input>
-                    <ul id="problems" class="form-element list">
-                    </ul>
-            </form>
-            <div id="result"></div>
-            <button class="form-element" onclick="update()">Update</button>
-        </div>
-        
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./javascripts/edit_contest.js"></script>
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/edit_contest.js"></script>
 </body>
-
 </html>

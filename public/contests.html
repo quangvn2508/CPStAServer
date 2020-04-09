@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
-    <link rel="stylesheet" href="./stylesheets/contests.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/two_section.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
     <title>Contests</title>
 </head>
-
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
         </div>
-        <div id="menu">
-            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
-            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="full-size-page two-sec-page">
+        <div class="two-section-page-title">
+            <div class="two-section-page-name">Contests</div>
+            <div class="two-section-page-para">Contest is a good way for us to improve our programming skills</div>
         </div>
-        <div id="account">
-            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+        <div class="two-sec-bar">
+            <div class="two-sec-bar-container two-sec-bar-container-3-col" id="bar-container-id">
+                <div class="two-sec-bar-item">
+                    <div class="centering-text two-sec-bar-text" id="weekly-id">Our Weekly contest</div>
+                </div>
+                <div class="two-sec-bar-item">
+                    <div class="centering-text two-sec-bar-text" id="past-id">Our past contests</div>
+                </div>
+                <div class="two-sec-bar-item">
+                    <div class="centering-text two-sec-bar-text" id="manage-id">Create your contest</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="top">
-        <div class="title">Contest</div>
-        <div class="message">Contest is a good way for us to improve our programming skills</div>
-    </div>
-    <div id="bot"></div>
-    <div id="middle" class="two-column">
-        <div><span>Our Weekly contest</span></div>
-        <div><span>Our past contests</span></div>
-        <div id="admin" onclick="toManageContests()"><span>Create your contests</span></div>
-    </div>
-
-    <script src="./javascripts/contests.js"></script>
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/contests.js"></script>
 </body>
-
 </html>

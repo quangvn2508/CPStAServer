@@ -1,0 +1,36 @@
+.md-preview {
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    border-top: 1px solid var(--global-color-DarkBlue);
+    border-bottom: 1px solid var(--global-color-DarkBlue);
+}
+
+.thin-container {
+    min-height: 100%;
+}
+
+.form-container {
+    padding: 0px 5px;
+}
+
+.editor-container {
+    width: 100%;
+    height: auto;
+}
+
+.cus-select-style {
+    background-color: #ffffff;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    outline: none;
+
+    color: var(--global-color-DarkBlue);
+    font-size: 1vmax;
+
+}
+
+.cus-select-style:hover, .custom-file-input:hover {
+    border: 1px solid var(--global-color-DarkBlue);
+}

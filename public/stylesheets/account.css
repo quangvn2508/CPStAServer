@@ -1,0 +1,123 @@
+/* Whole card (toggle button and content) */
+/* Toggle button is actually attach to the opposite form (i.e sign up button to log in form) */
+.card-container {
+    width: 400px;
+    height: 500px;
+
+    position: absolute;
+    left: calc(50% - 200px);
+    top: calc(50% - 250px);
+}
+
+/* toggle button */
+.card-toggle-btn {
+    width: 200px;
+    height: 50px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: none;
+    outline: none;
+
+    font-size: 25px;
+}
+
+/* card content */
+.card-content-container {
+    width: 400px;
+    height: 450px;
+
+    position: relative;
+    top: 50px;
+    
+    background-color: #ffffff;
+}
+
+.card-content-wrapper {
+    width: 100%;
+    height: auto;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) perspective(1px);
+
+    padding: 0px 50px;
+}
+
+.card-name {
+    margin-bottom: 50px;
+
+    color: var(--global-color-DarkBlue);
+    font-size: 30px;
+    text-align: center;
+}
+
+
+/* --- show animation class --- */
+/* For whole card */
+.show-card {
+    animation: show-card 1s linear 0s 1 normal;
+    transform: rotateY(0deg) !important;
+    z-index: 1;
+}
+    @keyframes show-card {
+        0% {
+            transform: perspective(1000px) rotateY(-180deg);
+        }
+        50% {
+            transform: perspective(1000px) rotateY(-90deg);
+        }
+        100% {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+    }
+
+/* For content */
+.show-card > .card-content-container {
+    transition-delay: 0.5s;
+    visibility: visible;
+}
+
+
+/* For toggle button (card toggle button is disable for element currently shown) */
+.show-card > .card-toggle-btn {
+    transition-delay: 0.5s;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* --- hide animation class --- */
+/* For whole card */
+.hide-card {
+    animation: hide-card 1s linear 0s 1 normal;
+    transform: rotateY(-180deg) !important;
+    z-index: 0;
+}
+
+    @keyframes hide-card {
+        0% {
+            transform: perspective(1000px) rotateY(-360deg);
+        }
+        50% {
+            transform: perspective(1000px) rotateY(-270deg);
+        }
+        100% {
+            transform: perspective(1000px) rotateY(-180deg);
+        }
+    }
+
+/* For content */
+.hide-card > .card-content-container {
+    transition-delay: 0.5s;
+    visibility: hidden;
+}
+
+/* For toggle button (card toggle button is enable for element currently hidden) */
+.hide-card > .card-toggle-btn {
+    transition-delay: 0.5s;
+    background-color: #ffffff;
+    color: var(--global-color-DarkBlue);
+}

@@ -1,0 +1,109 @@
+/*
+    1: size
+    2: position
+    3: style
+    4: text
+*/
+
+.navbar {
+    width: 100%;
+    height: 50px;
+
+    z-index: 99;
+    position: fixed;
+    top: 0;
+
+    background-color: var(--global-color-DarkBlue);
+    box-shadow: 0px 1px  #000000;
+}
+
+.nav-container {
+    width: 100%;
+    height: 50px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-brand {
+    width: 200px;
+    height: 50px;
+}
+
+.nav-brand-name {
+    width: 100px;
+    height: auto;
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    color: #ffffff;
+    font-size: 23px;
+    text-align: center;
+}
+
+.nav-brand-logo-container {
+    width: 100px;
+    height: 50px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.nav-brand-logo {
+    float: left;
+    height: 50px;
+}
+
+.nav-toggle {
+    height: 50px;
+    margin-right: 10px;
+    display: none;
+}
+
+.nav-item {
+    width: 120px;
+    height: 50px;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    color: #aaaaaa;
+    font-size: 18px;
+
+    background-color: var(--global-color-DarkBlue);
+}
+
+.nav-item:hover {
+    color: #ffffff;
+    background-color: var(--global-color-Blue);
+}
+
+.nav-left {
+    position: relative;
+    float: left;
+}
+
+.nav-right {
+    position: relative;
+    float: right;
+}
+
+@media (max-width: 679px) {
+    .nav-container {
+        height: 50px;
+    }
+
+    .nav-collapse {
+        width: 100%;
+    }
+
+    .nav-toggle {
+        display: initial;
+    }
+}

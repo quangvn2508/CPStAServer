@@ -1,0 +1,84 @@
+.two-sec-page {
+    background: linear-gradient(#ffffff 70%, var(--global-color-DarkBlue) 30%);
+}
+
+/* Contest navigation bar */
+.two-sec-bar {
+    width: 100%;
+    height: 200px;
+
+    position: relative;
+    top: 70%;
+    left: 0;
+    transform: translate(0, -50%);
+
+}
+
+.two-sec-bar-container {
+    height: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0%);
+
+    overflow: hidden;
+}
+
+.two-sec-bar-container-2-col {
+    width: 40vw;
+}
+
+
+.two-sec-bar-container-3-col {
+    width: 60vw;
+}
+
+.two-sec-bar-item {
+    height: calc(100% - 4px);
+    width: calc(20vw - 20px);
+
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0px 10px;
+
+    box-shadow: 5px 2px  #ffffff;
+    background-color: #ffffff;
+    border: 2px solid var(--global-color-DarkBlue);
+
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.two-sec-bar-item:hover {
+    box-shadow: 10px 4px  #ffffff;
+}
+
+.two-sec-bar-text {
+    font-size: 2vmax;
+    color: var(--global-color-DarkBlue);
+}
+
+/* Two section title field */
+.two-section-page-title {
+    width: 100%;
+    height: auto;
+
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.two-section-page-name {
+    text-align: center;
+    font-size: 6vmax;
+    color: var(--global-color-DarkBlue);
+}
+
+.two-section-page-para {
+    text-align: center;
+    font-size: 1vmax;
+    color: var(--global-color-DarkBlue);
+}

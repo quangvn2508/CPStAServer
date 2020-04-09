@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/two_section.css">
+    <link rel="stylesheet" href="stylesheets/profile.css">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <title>Profile</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="full-size-page two-sec-page">
+        <div class="two-section-page-title">
+            <div class="profile-picture-container">
+                <img id="profile-img-id" class="profile-picture" src="./static/resource/log.jpg" onerror="this.src='./static/resource/profile-default.svg';">
+            </div>
+            <div id="profile-nickname-id" class="profile-nickname">Nickname</div>
+        </div>
+        
+    </div>
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/profile.js"></script>
+</body>
+</html>

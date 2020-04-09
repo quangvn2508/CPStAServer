@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
-    <link rel="stylesheet" href="./stylesheets/manage_contests.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/table.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <title>Contests</title>
-    
+
+    <title>Manage contests</title>
 </head>
-
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
         </div>
-        <div id="menu">
-            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
-            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
-        </div>
-        <div id="account">
-            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="full-size-page bg-DarkBlue">
+        <div class="thin-container">
+            <div class="thin-page-name text-w">Manage contests</div>
+            <div class="table-container">
+                <table id="contests-table" class="table">
+                    <tr class="table-row table-header">
+                        <td>Contest name</td>
+                        <td>Date created</td>
+                        <td>Owner</td>
+                    </tr>
+                    <!-- onclick="location.href='./create_contest.html';" -->
+                    <tr id="create-btn-id" class="table-row table-body">
+                        <td>+</td>
+                        <td>+</td>
+                        <td>+</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
-
-    <div id="main-content">
-        <div class="title">Manage contests</div>
-        <div class="table-container">
-            <table style="width: 100%; position: absolute; top: 0; left: 0;" cellspacing="0" cellpadding="0">
-                
-                <thead>
-                    <tr>
-                        <th>Contest name</th>
-                        <th>Date created</th>
-                        <th>Owner</th>
-                    </tr>
-                </thead>
-                <tbody id="contest-list">
-                    <tr onclick="location.href='./create_contest.html';">
-                        <td>+</td>
-                        <td>+</td>
-                        <td>+</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./javascripts/manage_contests.js"></script>
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/table.js"></script>
+    <script src="javascripts/manage_contests.js"></script>
 </body>
-
 </html>

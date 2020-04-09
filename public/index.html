@@ -3,70 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/index_style.css">
-    <link rel="stylesheet" href="./stylesheets/navigation_style.css">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
     <title>CPStA</title>
 </head>
 <body>
-    <script src="./javascripts/navigation_script.js"></script>
-    <div id="nav-bar">
-        <div id="logo" onclick="toIndex()">
-            <img src="./resource/left_header.svg">
-            <img src="./resource/logo.jpg" style="height: 50px;">
-            <img src="./resource/right_header.svg">
-        </div>
-        <div id="menu">
-            <div class="nav-item" onclick="toContest()"><div>Contests</div></div>
-            <div class="nav-item" onclick="toProblem()"><div>Problems</div></div>
-        </div>
-        <div id="account">
-            <div class="nav-item" onclick="toProfile()"><div>Account</div></div>
-        </div>
-    </div>
-
-    <div id="content-bar">
-        <img src="./../resource/arrow.svg">
-        <div id="section-list">
-            <a href="#top"><div class="section-item">Home<div></div></div></a>
-            <a href="#About"><div class="section-item">About<div></div></div></a>
-            <a href="#Rules"><div class="section-item">Rules<div></div></div></a>
-            <a href="#Contact"><div class="section-item">Contact<div></div></div></a>
-        </div>
-    </div>
-
-    <div id="main-content">
-        <div id="top">
-            <div id="name">
-                <div id="CP">Competitive Programming</div>
-                <div id="SA">St Andrews</div>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
             </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
         </div>
+    </nav>
 
-        <div class="divider"></div>
-
-        <div id="About">
-            <div class="section-title">About</div>
-            <div class="content">&bullet; This contest is open to everyone of all skill levels and is only around 60 minutes long. We are a small group of St Andrews students whose main intention is to improve our algorithmic and problem solving skills. This will prepare one for competitive programming competitions as well as help one ace technical coding interviews.</div>
-        </div>
-
-        <div id="Rules">
-            <div class="section-title">Rules</div>
-            <div class="content">&bullet; The creator of this contest is solely responsible for setting and communicating the eligibility requirements associated with prizes awarded to participants, as well as for procurement and distribution of all prizes. The contest creator holds HackerRank harmless from and against any and all claims, losses, damages, costs, awards, settlements, orders, or fines.</div>
-        </div>
-
-        <div id="Contact">
-            <div class="section-title">Contact</div>
-            <div class="content">
-                <ul>
-                    <li>Facebook</li>
-                    <li>Github</li>
-                </ul>
+    <div class="home-nav">
+        <img class="home-nav-arrow" src="./static/resource/arrow.svg">
+        <a href="#Top">
+            <div class="home-nav-item">
+                <div class="centering-text home-nav-text">Home</div>
+                <div class="home-nav-item-decorate"></div>
             </div>
-        </div>
+        </a>
+        <a href="#About">
+            <div class="home-nav-item">
+                <div class="centering-text home-nav-text">About</div>
+                <div class="home-nav-item-decorate"></div>
+            </div>
+        </a>
+        <a href="#Team">
+            <div class="home-nav-item">
+                <div class="centering-text home-nav-text">Team</div>
+                <div class="home-nav-item-decorate"></div>
+            </div>
+        </a>
+        <a href="#Contact">
+            <div class="home-nav-item">
+                <div class="centering-text home-nav-text">Contact</div>
+                <div class="home-nav-item-decorate"></div>
+            </div>
+        </a>
     </div>
 
+    <!-- main content -->
+    <div id="Top" class="full-size-page bg-DarkBlue">
+        <div class="home-name cp">Competitive Programming</div>
+        <div class="home-name uni">St Andrews</div>
+    </div>
+    <div id="About" class="full-size-page bg-DarkBlue home-left-border">
+        <div class="home-section-name">About</div>
+        <div class="home-section-content-container"></div>
+    </div>
+    <div id="Team" class="full-size-page bg-DarkBlue home-left-border">
+        <div class="home-section-name">Team</div>
+        <div class="home-section-content-container"></div>
+    </div>
+    <div id="Contact" class="full-size-page bg-DarkBlue home-left-border">
+        <div class="home-section-name">Contact</div>
+        <div class="home-section-content-container"></div>
+    </div>
+
+    <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./javascripts/index_script.js"></script>
+    <script src="./javascripts/index.js"></script>
+    <script src="javascripts/nav.js"></script>
 </body>
 </html>

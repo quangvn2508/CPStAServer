@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="stylesheets/nav.css">
+    <link rel="stylesheet" href="stylesheets/basic_page.css">
+    <link rel="stylesheet" href="stylesheets/two_section.css">
+    <link rel="stylesheet" href="stylesheets/list.css">
+    <link rel="stylesheet" href="stylesheets/contest.css">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <title>Contests</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div id="nav-container" class="nav-container">
+            <!-- brand and logo -->
+            <div class="nav-brand nav-left">
+                <div class="nav-brand-name">CPStA</div>
+                <div class="nav-brand-logo-container">
+                    <img class="nav-brand-logo" src="./static/resource/logo.jpg">
+                </div>
+            </div>
+            <img id="nav-toggle" src="static/resource/menu.svg" class="nav-right nav-toggle">
+
+            <!-- navigation bar button -->
+            <button id="home-btn" class="nav-item nav-left nav-collapse">Home</button>
+            <button id="contests-btn" class="nav-item nav-left nav-collapse">Contests</button>
+            <button id="problems-btn" class="nav-item nav-left nav-collapse">Problems</button>
+            <button id="profile-btn" class="nav-item nav-right nav-collapse">Profile</button>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="one-section">
+        <div class="centering-text">
+            <div class="two-section-page-name" id="name">Weekly contest</div>
+        </div>
+    </div>
+    <div class="full-size-page bg-DarkBlue">
+        <div class="thin-container">
+            <div class="timer">00:00:00</div>
+            <div class="problems-container">
+                <ul class="list-container" id="problem-list"></ul>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- scripts -->
+    <script src="javascripts/nav.js"></script>
+    <script src="javascripts/contest.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+.form-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.form {
+    width: 100%;
+    height: auto;
+}
+
+.form-text-style {
+    padding: 5px 10px;
+    font-size: 1vmax;
+}
+
+.form input, .form-div-input {
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+}
+
+.form input:hover, .form-div-input:hover {
+    border: 1px solid var(--global-color-DarkBlue);
+}
+
+.form-div-input {
+    min-height: 100px !important;
+}
+
+/* Element height */
+.form-element {
+    float: left;
+    min-height: 40px;
+    margin: 10px 0px;
+}
+
+
+/* input types */
+
+[contentEditable=true]:empty:before{
+    content:attr(data-text);
+    color: #888888;
+}
+
+/* Submit button */
+.form-submit-btn {
+    cursor: pointer;
+    background-color: var(--global-color-DarkBlue);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
+/* Grid structure */
+.form-element-12-col {
+    width: 100%;
+}
+
+.form-element-8-col {
+    width: 67%;
+}
+
+.form-element-6-col {
+    width: 50%;
+}
+
+.form-element-4-col {
+    width: 33%;
+}
+
+.form-element-3-col {
+    width: 25%;
+}
+
+.form-clear {
+    clear: both;
+}
+
+/* input file */
+.cus-file-input::-webkit-file-upload-button {
+    background-color: #888888;
+    border: none;
+    height: 40px;
+}
+
+.cus-file-input {
+    position: relative;
+    padding: 0px;
+}
