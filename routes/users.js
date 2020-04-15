@@ -24,17 +24,32 @@ router.get('/admin', (req, res, next) => {
   })
 });
 
-router.get('/', (req, res, next) => {
+router.get('/admin/:usernameId', (req, res, next) => {
   authenticate.verifyAdmin(req)
   .then((user_id) => {
-    res.statusCode = 200;
-    res.end();
+    User.findOne({username: req.params.usernameId})
+    .select('username')
+    .then((user) => {
+      if (user === null) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({msg: 'User with this username not exist'});
+      }
+      else {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user);
+      }
+    })
+    .catch((err) => next(err));
   })
   .catch((err) => {
     res.statusCode = 401;
-    res.end();
+    res.setHeader('Content-Type', 'application/json');
+    res.json({msg: 'Please log in as admin to use this operation'});
   })
 });
+
 
 /**
  * Sign up

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const authenticate = require('./../authenticate');
 const Contest = require('./../models/contest');
 const User = require('./../models/user');
+const Problem = require('./../models/problem');
 
 const contestRouter = express.Router();
 
@@ -90,13 +91,17 @@ contestRouter.route('/admin/:contestId')
             if (user.ownedContests.indexOf(req.params.contestId) === -1) {
                 res.statusCode = 401;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({status: "You are not authorized to modify this contest"});
+                res.json({msg: "You are not authorized to modify this contest"});
             }
             else {
-                return Contest.findById(req.params.contestId).populate('testers', 'username').populate('problems','name');
+                return Contest.findById(req.params.contestId)
+                .populate('testers', 'username')
+                .populate('problems', 'name');
             }
         })
         .then((contest) => {
+            
+            console.log(contest);
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(contest);
@@ -106,7 +111,7 @@ contestRouter.route('/admin/:contestId')
     .catch((err) => {
         res.statusCode = 401;
         res.setHeader('Content-Type', 'application/json');
-        res.json({status: 'Please log in as admin to use this operation'});
+        res.json({msg: 'Please log in as admin to use this operation'});
     });
 })
 .put((req, res, next) => {
@@ -119,9 +124,10 @@ contestRouter.route('/admin/:contestId')
             if (user.ownedContests.indexOf(req.params.contestId) < 0) {
                 res.statusCode = 401;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({status: "You are not authorized to modify this contest"});
+                res.json({msg: "You are not authorized to modify this contest"});
             }
             else {
+                console.log(req.body);
                 return Contest.findByIdAndUpdate(req.params.contestId, req.body);
             }
         })

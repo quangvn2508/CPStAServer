@@ -13,26 +13,18 @@ problemRouter.route('/admin/')
 .post((req, res, next) => {
     authenticate.verifyAdmin(req)
     .then((user_id) => {
-        console.log(user_id);
         Problem.create({owner: user_id, contest: req.body.contestId, name: req.body.name})
         .then((problem) => {
-            if (problem === null) {
-                res.statusCode = 500;
-                res.setHeader('Content-Type', 'application/json');
-                res.json({status: 'Unable to create contest'});
-            }
-            else {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(problem);
-            }
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(problem);
         })
         .catch((err) => console.log(err));
     })
     .catch((err) => {
         res.statusCode = 401;
         res.setHeader('Content-Type', 'application/json');
-        res.json({status: 'Please log in as admin to use this operation'});
+        res.json({msg: 'Please log in as admin to use this operation'});
     })
 });
 
@@ -46,6 +38,11 @@ problemRouter.route('/admin/:problemId')
                 res.statusCode = 404;
                 res.setHeader('Content-Type', 'application/json');
                 res.json({status: "Cannot find problem with this id"});
+            }
+            else if (problem.owner.toString() !== user_id) {
+                res.statusCode = 401;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({status: "You are not authorised to modified this problem"});
             }
             else {
                 res.statusCode = 200;
@@ -66,19 +63,18 @@ problemRouter.route('/admin/:problemId')
     .then((user_id) => {
         Problem.findById(req.params.problemId)
         .then((problem) => {
-            console.log(user_id + " " + problem.owner );
             if (problem === null) {
                 res.statusCode = 404;
                 res.setHeader('Content-Type', 'application/json');
                 res.json({status: "Cannot find problem with this id"});
             }
-            else if (problem.owner != user_id) {
+            else if (problem.owner.toString() !== user_id) {
                 res.statusCode = 401;
                 res.setHeader('Content-Type', 'application/json');
                 res.json({status: "You are not authorized to modify this problem"});
             }
             else {
-                return problem.update(req.body);
+                return problem.updateOne(req.body);
             }
         })
         .catch((problem) => {
