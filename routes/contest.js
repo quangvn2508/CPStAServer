@@ -72,14 +72,43 @@ contestRouter.route('/admin')
         res.setHeader('Content-Type', 'application/json');
         res.json({status: 'Please log in as admin to use this operation'});
     });
-})
-.put((req, res, next) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /admin/');
-})
-.delete((req, res, next) => {
-    res.statusCode = 403;
-    res.end('DELETE operation not supported on /admin/');
+});
+
+contestRouter.route('/:contestId')
+.get((req, res, next) => {
+    Contest.findById(req.params.contestId)
+    .select('description rule name startTime endTime owner problems score')
+    .populate('problems', 'name')
+    .then((contest) => {
+        // Remove problems field
+        var problems = contest.problems;
+        contest.problems = [];
+
+        var today = new Date();
+        var startTime = contest.startTime;
+        if (startTime.getTime() > today.getTime()) {
+            authenticate.verifyLogin(req)
+            .then((user_id) => {
+                if (contest.owner.toString() === user_id || contest.testers.indexOf(user_id) !== -1) {
+                    contest.problems = problems;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
+        else {
+            contest.problems = problems;
+        }
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(contest);
+    })
+    .catch((err) => {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({msg: "Cannot find the contest with this id"});
+    });
 });
 
 contestRouter.route('/admin/:contestId')
@@ -120,7 +149,6 @@ contestRouter.route('/admin/:contestId')
         User.findById(user_id)
         .select('ownedContests')
         .then((user) => {
-            console.log(user);
             if (user.ownedContests.indexOf(req.params.contestId) < 0) {
                 res.statusCode = 401;
                 res.setHeader('Content-Type', 'application/json');

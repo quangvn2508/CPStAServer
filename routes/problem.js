@@ -66,7 +66,7 @@ problemRouter.route('/admin/:problemId')
             if (problem === null) {
                 res.statusCode = 404;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({status: "Cannot find problem with this id"});
+                res.json({status: "Cannot find the problem"});
             }
             else if (problem.owner.toString() !== user_id) {
                 res.statusCode = 401;
@@ -77,7 +77,7 @@ problemRouter.route('/admin/:problemId')
                 return problem.updateOne(req.body);
             }
         })
-        .catch((problem) => {
+        .then((problem) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(problem);

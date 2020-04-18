@@ -38,16 +38,21 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 
 exports.verifyLogin = (req) => {
-    var token = opts.jwtFromRequest(req);
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, config.secretKey, function (err, decoded) {
-            if (err) {
-                reject (err);
-            } else if (decoded) {
-                resolve(decoded._id);
-            }
+    if (req.headers.authorization === undefined) {
+        return new Promise((resolve, reject) => {reject("You are not log in")});
+    }
+    else {
+        var token = opts.jwtFromRequest(req);
+        return new Promise((resolve, reject) => {
+            jwt.verify(token, config.secretKey, function (err, decoded) {
+                if (err) {
+                    reject (err);
+                } else if (decoded) {
+                    resolve(decoded._id);
+                }
+            });
         });
-    })
+    }
 }
 
 exports.verifyAdmin = (req) => {

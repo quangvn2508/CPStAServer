@@ -90,7 +90,10 @@ edit_contest = function(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
                 res = JSON.parse(this.response);
-                console.log(res);
+                if (this.status === 200) {
+                    alert("Update successfully");
+                }
+                else alert(res.msg);
             }
         };
     
@@ -156,8 +159,8 @@ edit_contest = function(){
         elements['name'].innerHTML = _obj['name'];
         elements['startTime'].defaultValue = _obj['startTime'].substring(0, 16);
         elements['endTime'].defaultValue = _obj['endTime'].substring(0, 16);
-        elements['description'].innerHTML = _obj['description'];
-        elements['rule'].innerHTML = _obj['rule'];
+        elements['description'].value = _obj['description'];
+        elements['rule'].value = _obj['rule'];
 
         for (i = 0; i <  _obj['testers'].length; i++) {
             elements['testers'].appendChild(createTesterLi(_obj['testers'][i]['_id'], _obj['testers'][i]['username']));
@@ -179,8 +182,8 @@ edit_contest = function(){
             obj['startTime'] = elements['startTime'].value;
             obj['endTime'] = elements['endTime'].value;
         }
-        obj['description'] = elements['description'].innerHTML;
-        obj['rule'] = elements['rule'].innerHTML;
+        obj['description'] = elements['description'].value;
+        obj['rule'] = elements['rule'].value;
         obj['testers'] = [];
         temp = elements['testers'].getElementsByTagName("li");
         for (i = 0; i < temp.length; i++) {

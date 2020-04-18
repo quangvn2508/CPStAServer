@@ -6,6 +6,31 @@
     padding-top: 50px;
 }
 
+.info-section {
+    width: 100%;
+    height: auto;
+
+    margin: 20px 0px;
+}
+
+.section-name {
+    width: 100%;
+    height: auto;
+
+    text-align: center;
+    font-size: 3vmax;
+    color: #ffffff;
+}
+
+.section-info {
+    width: 100%;
+    padding: 5px;
+
+    text-align: center;
+    font-size: 1.2vmax;
+    color: #ffffff;
+}
+
 .timer {
     position: relative;
     top: 70%;
@@ -14,6 +39,7 @@
     font-size: 30px;
     color: #ffffff;
 }
+
 
 .problems-container {
     width: 100%;
@@ -25,7 +51,7 @@
     border-bottom: 2px groove #555555;
 
     position: relative;
-    margin-top: 100px;
+    margin: 100px 0px;
 }
 
 .contest-list-style {
