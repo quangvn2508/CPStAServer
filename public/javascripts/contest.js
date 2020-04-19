@@ -4,7 +4,7 @@ contest = function(){
     const elements_id = ["name", "time", "description", "rule"];
     const params = nav.getUrlParams();
     const URL = window.location;
-    var xmlhttp, url, res, i, elements = {}, startTime, endTime;
+    var xmlhttp, url, res, i, elements = {}, startTime, endTime, clock = {};
 
     /**
      * Go to problem page
@@ -53,6 +53,10 @@ contest = function(){
         return li;
     }
 
+    /**
+     * set up initial page
+     * @param {JSON} _obj 
+     */
     function setupPage(_obj) {
         console.log(_obj);
         console.log(_obj['problems']);
@@ -73,5 +77,34 @@ contest = function(){
             }
             problem_list.appendChild(temp);
         }
+        var t = setInterval(function(){ 
+            setTimer();
+        }, 1000);
     }
+
+    function secToTime(s) {
+        s = s | 0;
+        clock['days'] = (s / 86400) | 0;
+        s = s % 86400;
+        clock['hours'] = (s / 3600) | 0;
+        s = s % 3600;
+        clock['minutes'] = (s / 60) | 0;
+        clock['seconds'] = s % 60;
+    }
+
+    function setTimer() {
+        var today = new Date();
+        if (today.getTime() < startTime.getTime()) {
+            secToTime((startTime.getTime() - today.getTime())/1000);
+            timer.innerHTML = "Before start: ";
+        }
+        else if (today.getTime() < endTime.getTime()) {
+            secToTime((endTime.getTime() - today.getTime())/1000);
+            timer.innerHTML = "Before end: ";
+        }
+        timer.innerHTML += clock['days'] + ":" + clock['hours'] + ":" + clock['minutes'] + ":" + clock['seconds']; 
+        console.log(clock);
+    }
+
+    
 }();

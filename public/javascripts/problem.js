@@ -13,6 +13,11 @@ problem = function(){
     ];
     const theme_selector = document.getElementById("theme-selector");
     const mode_selector = document.getElementById("mode-selector");
+    const problem_name = document.getElementById("name");
+    const params = nav.getUrlParams();
+    const URL = window.location;
+    var xmlhttp, url, res, i;
+
     theme_selector.addEventListener('change', changeTheme, false);
     mode_selector.addEventListener('change', changeMode, false);
     
@@ -57,6 +62,21 @@ problem = function(){
 
         // render problem statement
         renderMD("*Loading problem statment...*");
+
+        // Get problem info
+        xmlhttp = new XMLHttpRequest();
+        url = URL.protocol + "//" + URL.host + "/problem/" + params['id'];
+        
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                res = JSON.parse(this.response);
+                if (this.status === 200) setupPage(res);
+                else alert(res.msg);
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('token'));
+        xmlhttp.send();
     }();
 
     /**
@@ -87,6 +107,15 @@ problem = function(){
      */
     function renderMD(md) {
         document.getElementById("preview").innerHTML = marked(md);
+    }
+
+    /**
+     * set up initial page
+     * @param {JSON} _obj 
+     */
+    function setupPage(_obj) {
+        problem_name.innerHTML = _obj['name'];
+        renderMD(_obj['statement']);
     }
 }();
 /*

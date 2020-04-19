@@ -77,32 +77,32 @@ contestRouter.route('/admin')
 contestRouter.route('/:contestId')
 .get((req, res, next) => {
     Contest.findById(req.params.contestId)
-    .select('description rule name startTime endTime owner problems score')
+    .select('description rule name startTime endTime owner problems score testers')
     .populate('problems', 'name')
     .then((contest) => {
-        // Remove problems field
-        var problems = contest.problems;
-        contest.problems = [];
-
         var today = new Date();
         var startTime = contest.startTime;
-        if (startTime.getTime() > today.getTime()) {
+        if (startTime.getTime() <= today.getTime()) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(contest);
+        }
+        else {
             authenticate.verifyLogin(req)
             .then((user_id) => {
-                if (contest.owner.toString() === user_id || contest.testers.indexOf(user_id) !== -1) {
-                    contest.problems = problems;
+                console.log(contest);
+                if (contest.owner.toString() !== user_id && contest.testers.indexOf(user_id) === -1) {
+                    contest.problems = [];
                 }
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(contest);
             })
             .catch((err) => {
                 console.log(err);
             });
+
         }
-        else {
-            contest.problems = problems;
-        }
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(contest);
     })
     .catch((err) => {
         res.statusCode = 404;
@@ -155,7 +155,6 @@ contestRouter.route('/admin/:contestId')
                 res.json({msg: "You are not authorized to modify this contest"});
             }
             else {
-                console.log(req.body);
                 return Contest.findByIdAndUpdate(req.params.contestId, req.body);
             }
         })
