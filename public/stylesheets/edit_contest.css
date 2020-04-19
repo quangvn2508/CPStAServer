@@ -18,3 +18,14 @@
     padding-left: 5px;
     font-size: 0.9vmax;
 }
+
+.contest-link {
+    padding-left: 20px;
+    color: #777777;
+    font-size: 1vmax;
+    cursor: pointer;
+}
+
+.contest-link:hover {
+    text-decoration: underline;
+}

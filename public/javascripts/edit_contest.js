@@ -1,5 +1,5 @@
 edit_contest = function(){
-    const form_ids = [ "name", "startTime", "endTime", "description", "rule", "testers", "problems"];
+    const form_ids = [ "name", "link", "startTime", "endTime", "description", "rule", "testers", "problems"];
     const submit_btn = document.getElementById("submit-btn");
     const tester_add = document.getElementById("tester-add");
     const problem_add = document.getElementById("problem-add");
@@ -157,6 +157,8 @@ edit_contest = function(){
     function setForm(_obj) {
         var i;
         elements['name'].innerHTML = _obj['name'];
+        elements['link'].innerHTML = URL.protocol + "//" + URL.host + "/contest.html?id=" + params['id'];
+        elements['link'].addEventListener('click', toContest, false);
         elements['startTime'].defaultValue = _obj['startTime'].substring(0, 16);
         elements['endTime'].defaultValue = _obj['endTime'].substring(0, 16);
         elements['description'].value = _obj['description'];
@@ -198,6 +200,10 @@ edit_contest = function(){
         }
         console.log(obj);
         return obj;
+    }
+
+    function toContest() {
+        location.href = elements['link'].innerHTML;
     }
 
     return {
