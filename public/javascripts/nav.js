@@ -60,11 +60,13 @@ nav = function() {
             
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4) {
-                    if (this.status === 401) location.href = "./account.html"; 
-                    else if (this.status === 200) {
+                    if (this.status === 200) {
                         res = JSON.parse(this.response);
                         location.href = '/profile.html?username=' + res.username;
-                    } 
+                    }
+                    else {
+                        location.href = "./account.html"; 
+                    }
                 }
             };
     
